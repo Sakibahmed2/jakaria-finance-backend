@@ -6,4 +6,5 @@ dotenv.config({ path: path.join(process.cwd(), ".env") });
 export default {
   port: process.env.PORT || 5000,
   mongodbUri: process.env.MONGODB_URI,
+  jwtSecret: process.env.JWT_SECRET || "default",
 };

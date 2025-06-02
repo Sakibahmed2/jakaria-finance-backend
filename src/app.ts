@@ -4,6 +4,7 @@ import globalErrorHandler from "./app/middleware/globalErrorHandler";
 import notFound from "./app/middleware/notFound";
 import { servicesRouter } from "./app/modules/service/service.routes";
 import { blogRouter } from "./app/modules/blog/blog.routes";
+import { authRouter } from "./app/modules/auth/auth.routes";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 // Routers
 app.use("/api/v1/services", servicesRouter);
 app.use("/api/v1/blogs", blogRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Jakaria finance API!");
