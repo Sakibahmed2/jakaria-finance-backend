@@ -2,12 +2,17 @@ import cors from "cors";
 import express from "express";
 import globalErrorHandler from "./app/middleware/globalErrorHandler";
 import notFound from "./app/middleware/notFound";
+import { servicesRouter } from "./app/modules/service/service.routes";
 
 const app = express();
 
 // Middleware to parse JSON bodies and enable CORS
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: true, limit: "1mb" }));
+
+// Routers
+app.use("/api/v1/services", servicesRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Jakaria finance API!");
