@@ -11,6 +11,14 @@ const blogSchema = new Schema(
       type: String,
       required: true,
     },
+    img: {
+      type: String,
+      required: true,
+    },
+    topic: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
