@@ -9,10 +9,6 @@ const createService = async (data: TService) => {
 const getAllServices = async () => {
   const result = await Services.find();
 
-  if (!result || result.length === 0) {
-    throw new Error("No services found");
-  }
-
   return result;
 };
 

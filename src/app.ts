@@ -10,9 +10,21 @@ import { newsletterRouter } from "./app/modules/newsletter/newsletter.route";
 const app = express();
 
 // Middleware to parse JSON bodies and enable CORS
-app.use(express.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: true, limit: "1mb" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://jakaria.finance",
+      "https://finance-tech.vercel.app",
+      "https://jakaria.finance",
+      "http://localhost:3000",
+      "https://www.jakaria.finance",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  })
+);
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(express.json({ limit: "10mb" }));
 
 // Routers
 app.use("/api/v1/services", servicesRouter);

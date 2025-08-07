@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import QueryBuilder from "../../builder/QueryBuilder";
 import { Blogs } from "./blog.model";
 import { TBlog } from "./blog.type";
 
@@ -12,22 +14,40 @@ const createBlog = async (blogData: TBlog) => {
   return result;
 };
 
-const getAllBlogs = async () => {
-  const result = await Blogs.find();
+const getAllBlogs = async (query: any) => {
+  const blogQuery = new QueryBuilder(Blogs.find(), query)
+    .search(["title", "content", "topic"])
+    .filter()
+    .sort()
+    .paginate();
 
-  if (!result || result.length === 0) {
-    throw new Error("There are no blogs available");
-  }
+  const blogs = await blogQuery.moduleQuery;
+  const meta = await blogQuery.countTotal();
 
-  return result;
+  return { blogs, meta };
 };
 
 const getSingleBlog = async (id: string) => {
-  const result = await Blogs.findById(id);
-  if (!result) {
+  const currentBlog = await Blogs.findById(id);
+  if (!currentBlog) {
     throw new Error("Blog not found");
   }
-  return result;
+
+  // Find next blog new one
+  const nextBlog = await Blogs.findOne({
+    createdAt: { $gt: currentBlog.createdAt },
+  }).sort({ createdAt: 1 });
+
+  // Find previous blog
+  const prevBlog = await Blogs.findOne({
+    createdAt: { $lt: currentBlog.createdAt },
+  }).sort({ createdAt: -1 });
+
+  return {
+    currentBlog,
+    nextBlog,
+    prevBlog,
+  };
 };
 
 const updateBlog = async (id: string, blogData: TBlog) => {

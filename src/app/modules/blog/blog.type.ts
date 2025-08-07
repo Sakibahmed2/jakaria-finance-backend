@@ -3,4 +3,6 @@ export type TBlog = {
   content: string;
   img: string;
   topic: string;
+  conclusion?: string;
+  createdDate?: string;
 };
