@@ -21,11 +21,10 @@ const blogSchema = new Schema(
     },
     conclusion: {
       type: String,
-      required: false,
+      default: "Hello",
     },
     createdDate: {
       type: Date,
-      required: false,
       default: Date.now,
     },
   },

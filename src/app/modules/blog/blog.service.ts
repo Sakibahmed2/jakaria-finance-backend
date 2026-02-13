@@ -33,21 +33,17 @@ const getSingleBlog = async (id: string) => {
     throw new Error("Blog not found");
   }
 
-  // Find next blog new one
-  const nextBlog = await Blogs.findOne({
-    createdAt: { $gt: currentBlog.createdAt },
-  }).sort({ createdAt: 1 });
+  // // Find next blog new one
+  // const nextBlog = await Blogs.findOne({
+  //   createdAt: { $gt: currentBlog.createdAt },
+  // }).sort({ createdAt: 1 });
 
-  // Find previous blog
-  const prevBlog = await Blogs.findOne({
-    createdAt: { $lt: currentBlog.createdAt },
-  }).sort({ createdAt: -1 });
+  // // Find previous blog
+  // const prevBlog = await Blogs.findOne({
+  //   createdAt: { $lt: currentBlog.createdAt },
+  // }).sort({ createdAt: -1 });
 
-  return {
-    currentBlog,
-    nextBlog,
-    prevBlog,
-  };
+  return currentBlog;
 };
 
 const updateBlog = async (id: string, blogData: TBlog) => {

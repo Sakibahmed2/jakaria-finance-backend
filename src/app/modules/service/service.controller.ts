@@ -56,13 +56,12 @@ const updateService = catchAsync(async (req, res) => {
 const deleteService = catchAsync(async (req, res) => {
   const { id } = req.params;
 
-  const result = await ServiceServices.deleteService(id);
+  await ServiceServices.deleteService(id);
 
   sendResponse(res, {
     statusCode: 200,
     success: true,
     message: "Service deleted successfully",
-    data: result,
   });
 });
 

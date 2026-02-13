@@ -19,6 +19,8 @@ app.use(
       "https://jakaria.finance",
       "http://localhost:3000",
       "https://www.jakaria.finance",
+      "https://instantfunding.uk",
+      "http://instantfunding.uk",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })

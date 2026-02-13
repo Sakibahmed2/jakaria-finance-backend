@@ -16,6 +16,13 @@ const serviceSchema = new Schema(
       type: String,
       required: true,
     },
+    features: [
+      {
+        type: String,
+        required: false,
+        trim: true,
+      },
+    ],
   },
   {
     timestamps: true,
